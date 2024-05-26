@@ -1,10 +1,8 @@
 import pandas as pd
 
-# Fungsi untuk membaca data gudang dari file CSV
 def baca_data_gudang(file_path):
     return pd.read_csv(file_path)
 
-# Fungsi untuk melakukan selection sort berdasarkan tanggal masuk
 def selection_sort_tanggal(data):
     n = len(data)
     for i in range(n - 1):
@@ -13,13 +11,11 @@ def selection_sort_tanggal(data):
             if data.at[j, 'tanggal_masuk'] < data.at[min_idx, 'tanggal_masuk']:
                 min_idx = j
         if min_idx != i:
-            # Tukar posisi data
-            temp = data.iloc[i].copy()
-            data.iloc[i] = data.iloc[min_idx]
-            data.iloc[min_idx] = temp
+            temp = data.loc[i].copy()
+            data.loc[i] = data.loc[min_idx]
+            data.loc[min_idx] = temp
     return data
 
-# Fungsi untuk pencarian linear berdasarkan nama barang
 def linear_search_nama(data, nama_barang):
     hasil_pencarian = []
     for index, row in data.iterrows():
@@ -27,7 +23,6 @@ def linear_search_nama(data, nama_barang):
             hasil_pencarian.append(row)
     return pd.DataFrame(hasil_pencarian)
 
-# Fungsi untuk pencarian linear berdasarkan tanggal masuk
 def linear_search_tanggal(data, tanggal_masuk):
     hasil_pencarian = []
     for index, row in data.iterrows():
@@ -35,7 +30,6 @@ def linear_search_tanggal(data, tanggal_masuk):
             hasil_pencarian.append(row)
     return pd.DataFrame(hasil_pencarian)
 
-# Fungsi untuk pemberitahuan stok hampir habis
 def pemberitahuan_stok_hampir_habis(data, ambang_batas):
     stok_hampir_habis = []
     for index, row in data.iterrows():
@@ -43,7 +37,6 @@ def pemberitahuan_stok_hampir_habis(data, ambang_batas):
             stok_hampir_habis.append(row)
     return pd.DataFrame(stok_hampir_habis)
 
-# Fungsi untuk pengelompokan barang berdasarkan kategori (Divide and Conquer)
 def pengelompokan_kategori(data):
     def divide_conquer(data):
         if len(data) <= 1:
@@ -53,7 +46,6 @@ def pengelompokan_kategori(data):
         left = divide_conquer(data.iloc[:mid])
         right = divide_conquer(data.iloc[mid:])
 
-        # Menggabungkan hasil dari left dan right
         merged = {}
         for key in left:
             if key in right:
@@ -69,28 +61,20 @@ def pengelompokan_kategori(data):
     data_dict = divide_conquer(data)
     return data_dict
 
-# Fungsi untuk manajemen persediaan (tambah/kurang jumlah barang)
 def manajemen_persediaan(data, nama_barang, jumlah, operasi, file_path):
     if operasi == 'tambah':
-        # Cek apakah barang sudah ada
         if data[data['nama'] == nama_barang].empty:
-            # Jika tidak ada, tambahkan data baru
             data_baru = pd.DataFrame({'nama': [nama_barang], 'jumlah': [jumlah]})
             data = pd.concat([data, data_baru], ignore_index=True)
         else:
-            # Jika sudah ada, tambahkan jumlah
             data.loc[data['nama'] == nama_barang, 'jumlah'] += jumlah
     elif operasi == 'kurang':
-        # Kurangi jumlah barang
         data.loc[data['nama'] == nama_barang, 'jumlah'] -= jumlah
-        # Hapus data jika jumlah menjadi kurang dari atau sama dengan 0
         data = data[data['jumlah'] > 0]
 
-    # Simpan perubahan ke file CSV
     data.to_csv(file_path, index=False)
     return data
 
-# Fungsi untuk menampilkan menu utama
 def menu(file_path):
     data_gudang = baca_data_gudang(file_path)
     
@@ -175,7 +159,6 @@ def menu(file_path):
         else:
             print("Pilihan tidak valid, coba lagi.")
 
-# Fungsi utama untuk menjalankan program
 def main():
     file_path = 'gudang.csv'
     menu(file_path)
