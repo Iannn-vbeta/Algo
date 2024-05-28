@@ -1,7 +1,8 @@
 import csv
+import datetime
 import os
 
-file_path = 'gudang.csv'
+file_path = './gudang.csv'
 
 def baca_data():
     if not os.path.exists(file_path):
@@ -173,9 +174,36 @@ def main():
 
                 if sub_pilihan == '1':
                     # Tambah Barang
-                    nama = input("Masukkan nama barang yang ingin ditambahkan: ")
-                    jumlah = input("Masukkan jumlah barang yang ingin ditambahkan: ")
-                    data_gudang.append({'nama': nama, 'jumlah': jumlah, 'tanggal_masuk': '2024-05-01', 'kategori': 'Umum'})
+                    nama = input("Masukkan nama barang: ")
+                    jumlah = input("Masukkan jumlah barang: ")
+                    data_gudang.append({'nama': nama, 'jumlah': jumlah, 'tanggal_masuk': datetime.datetime.now().strftime("%Y-%m-%d")})
+                    while True:
+                        print("==========================================")
+                        print("        Manajemen Persediaan Barang")
+                        print("==========================================")
+                        print("1. Alat")
+                        print("2. Pupuk")
+                        print("3. Benih")
+                        print("4. Pakan")
+                        print("5. Hasil Panen")
+                        print("0. Kembali ke Menu Utama")
+                        sub_sub_pilihan = input("Pilih opsi (1-5) atau 0 untuk kembali: ")
+                            
+                        if sub_sub_pilihan == '1':
+                            data_gudang.append({'kategori':'Alat'})
+                        elif sub_sub_pilihan == '2':
+                            data_gudang.append({'kategori':'Pupuk'})
+                        elif sub_sub_pilihan == '3':
+                            data_gudang.append({'kategori':'Benih'})
+                        elif sub_sub_pilihan == '4':
+                            data_gudang.append({'kategori':'Pakan'})
+                        elif sub_sub_pilihan == '5':
+                            data_gudang.append({'kategori':'Hasil Panen'})
+                        elif sub_pilihan == 0:
+                            break
+                        else:
+                            print("Pilihan tidak valid, coba lagi.")
+                            input("\nTekan Enter untuk kembali ke menu.")
                     print("Barang berhasil ditambahkan.")
                     tulis_data(data_gudang)
                     input("\nTekan Enter untuk kembali ke menu.")
