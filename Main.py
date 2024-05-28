@@ -6,7 +6,7 @@ file_path = './gudang.csv'
 
 def baca_data():
     if not os.path.exists(file_path):
-        with open(file_path, mode='w', newline='') as file:
+        with open(file_path, mode='r', newline='') as file:
             fieldnames = ['nama', 'jumlah', 'tanggal_masuk', 'kategori']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
@@ -38,7 +38,7 @@ def selection_sort_tanggal(data):
 def linear_search_nama(data, nama_barang):
     hasil_pencarian = []
     for row in data:
-        if row['nama'][:3].lower() == nama_barang.lower():
+        if row['nama'].lower() == nama_barang.lower():
             hasil_pencarian.append(row)
     return hasil_pencarian
 
@@ -164,7 +164,7 @@ def main():
             while True:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("==========================================")
-                print("        Manajemen Persediaan Barang")
+                print("        Manajemen Persediaan Barang       ")
                 print("==========================================")
                 print("1. Tambah Barang")
                 print("2. Hapus Barang")
