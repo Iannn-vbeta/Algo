@@ -6,7 +6,7 @@ file_path = './gudang.csv'
 
 def baca_data():
     if not os.path.exists(file_path):
-        with open(file_path, mode='r', newline='') as file:
+        with open(file_path, mode='w', newline='') as file:
             fieldnames = ['nama', 'jumlah', 'tanggal_masuk', 'kategori']
             writer = csv.DictWriter(file, fieldnames=fieldnames)
             writer.writeheader()
@@ -34,7 +34,6 @@ def selection_sort_tanggal(data):
         data[i], data[min_idx] = data[min_idx], data[i]
     return data
 
-
 def linear_search_nama(data, nama_barang):
     hasil_pencarian = []
     for row in data:
@@ -42,14 +41,12 @@ def linear_search_nama(data, nama_barang):
             hasil_pencarian.append(row)
     return hasil_pencarian
 
-
 def linear_search_tanggal(data, tanggal_masuk):
     hasil_pencarian = []
     for row in data:
         if row['tanggal_masuk'] == tanggal_masuk:
             hasil_pencarian.append(row)
     return hasil_pencarian
-
 
 def pencarian_barang(data_gudang):
     while True:
@@ -176,10 +173,13 @@ def main():
                     # Tambah Barang
                     nama = input("Masukkan nama barang: ")
                     jumlah = input("Masukkan jumlah barang: ")
-                    data_gudang.append({'nama': nama, 'jumlah': jumlah, 'tanggal_masuk': datetime.datetime.now().strftime("%Y-%m-%d")})
+                    tanggal_masuk = input("Masukkan tanggal masuk (YYYY-MM-DD) atau kosongkan untuk tanggal hari ini: ")
+                    if not tanggal_masuk:
+                        tanggal_masuk = datetime.datetime.now().strftime("%Y-%m-%d")
+                    kategori = ""
                     while True:
                         print("==========================================")
-                        print("        Manajemen Persediaan Barang")
+                        print("        Kategori Barang")
                         print("==========================================")
                         print("1. Alat")
                         print("2. Pupuk")
@@ -187,25 +187,35 @@ def main():
                         print("4. Pakan")
                         print("5. Hasil Panen")
                         print("0. Kembali ke Menu Utama")
-                        sub_sub_pilihan = input("Pilih opsi (1-5) atau 0 untuk kembali: ")
+                        sub_sub_pilihan = input("Pilih kategori (1-5) atau 0 untuk kembali: ")
                             
                         if sub_sub_pilihan == '1':
-                            data_gudang.append({'kategori':'Alat'})
+                            kategori = 'Alat'
+                            break
                         elif sub_sub_pilihan == '2':
-                            data_gudang.append({'kategori':'Pupuk'})
+                            kategori = 'Pupuk'
+                            break
                         elif sub_sub_pilihan == '3':
-                            data_gudang.append({'kategori':'Benih'})
+                            kategori = 'Benih'
+                            break
                         elif sub_sub_pilihan == '4':
-                            data_gudang.append({'kategori':'Pakan'})
+                            kategori = 'Pakan'
+                            break
                         elif sub_sub_pilihan == '5':
-                            data_gudang.append({'kategori':'Hasil Panen'})
-                        elif sub_pilihan == 0:
+                            kategori = 'Hasil Panen'
+                            break
+                        elif sub_sub_pilihan == '0':
                             break
                         else:
                             print("Pilihan tidak valid, coba lagi.")
                             input("\nTekan Enter untuk kembali ke menu.")
-                    print("Barang berhasil ditambahkan.")
-                    tulis_data(data_gudang)
+                    
+                    if kategori:
+                        data_gudang.append({'nama': nama, 'jumlah': jumlah, 'tanggal_masuk': tanggal_masuk, 'kategori': kategori})
+                        print("Barang berhasil ditambahkan.")
+                        tulis_data(data_gudang)
+                    else:
+                        print("Barang tidak ditambahkan, kategori tidak dipilih.")
                     input("\nTekan Enter untuk kembali ke menu.")
                 
                 elif sub_pilihan == '2':
