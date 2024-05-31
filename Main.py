@@ -1,6 +1,7 @@
 import csv
 import datetime
 import os
+from ptabel import PTable
 
 file_path = './gudang.csv'
 
@@ -15,6 +16,27 @@ def baca_data():
         reader = csv.DictReader(file)
         data = [row for row in reader]
     return data
+
+def statistik_gudang(data_gudang):
+    total_barang = len(data_gudang)
+    total_jumlah = sum(int(row['jumlah']) for row in data_gudang)
+    total_barang_per_kategori = {}
+    for row in data_gudang:
+        kategori = row['kategori']
+        if kategori not in total_barang_per_kategori:
+            total_barang_per_kategori[kategori] = 0
+        total_barang_per_kategori[kategori] += 1
+    dict_return = {
+        'total_barang': total_barang,
+        'total_jumlah': total_jumlah,
+        'total_barang_per_kategori': total_barang_per_kategori
+    }
+    print(f"  Total Barang: {total_barang}")
+    print(f"  Total Jumlah: {total_jumlah}")
+    print( "  Total Barang per Kategori:")
+    for kategori, total in total_barang_per_kategori.items():
+        print(f"  | {kategori}: {total}")    
+    return dict_return
 
 def tulis_data(data):
     with open(file_path, mode='w', newline='') as file:
@@ -43,12 +65,19 @@ def linear_search_nama(data, nama_barang):
 
 def linear_search_tanggal(data, tanggal_masuk):
     hasil_pencarian = []
-    tanggal_masuk = tanggal_masuk.lower()  
+    tanggal_masuk = tanggal_masuk.lower()
     for row in data:
         if tanggal_masuk in row['tanggal_masuk'].lower(): 
             hasil_pencarian.append(row)
     return hasil_pencarian
 
+
+def pemberitahuan_stok_habis(data_gudang, ambang_batas):
+    stok_hampir_habis = []
+    for row in data_gudang:
+        if int(row['jumlah']) <= ambang_batas:
+            stok_hampir_habis.append(row)
+    return stok_hampir_habis
 
 def pencarian_barang(data_gudang):
     while True:
@@ -106,8 +135,10 @@ def main():
         if pilihan == '1':
             #fitur 1: Pengurutan Otomatis
             data_terurut = selection_sort_tanggal(data_gudang)
+            x = PTable(["Nama", "Jumlah", "Tanggal Masuk", "Kategori"])
             for row in data_terurut:
-                print(row)
+                x.add_row([row['nama'], row['jumlah'], row['tanggal_masuk'], row['kategori']])
+            print(x)
             input("\nTekan Enter untuk kembali ke menu.")
         
         elif pilihan == '2':
@@ -217,7 +248,7 @@ def main():
                 "3": "Peralatan",
                 "4": "Obat",
                 "5": "Mesin"
-                }   
+                }       
             selected_category = category_mapping.get(choice, None)  
             tampilkan_tabel(grouped_items, selected_category)
         
@@ -232,6 +263,7 @@ def main():
                 print("1. Tambah Barang")
                 print("2. Hapus Barang")
                 print("3. Update Jumlah Barang")
+                print("4. Barang Keluar")
                 print("0. Kembali ke Menu Utama")
                 sub_pilihan = input("Pilih opsi (1-3) atau 0 untuk kembali: ")
 
@@ -312,7 +344,25 @@ def main():
                         print("Jumlah barang berhasil diupdate.")
                     tulis_data(data_gudang)
                     input("\nTekan Enter untuk kembali ke menu.")
-                
+                    
+                elif sub_pilihan =="4":
+                    nama = input("Masukkan nama barang yang keluar: ")
+                    jumlah = input("Masukkan jumlah barang yang keluar: ")
+                    for row in data_gudang:
+                        if row['nama'] == nama:
+                            if int(row['jumlah']) < int(jumlah):
+                                print("Jumlah barang tidak mencukupi.")
+                                break
+                            row['jumlah'] = str(int(row['jumlah']) - int(jumlah))
+                            print("Barang berhasil keluar.")
+                            tulis_data(data_gudang)
+                            break
+                    tanggal_keluar = input("Masukkan tanggal keluar (YYYY-MM-DD) atau kosongkan untuk tanggal hari ini: ")
+                    if not tanggal_keluar:
+                        tanggal_keluar = datetime.datetime.now().strftime("%Y-%m-%d")
+                    input("\nTekan Enter untuk kembali ke menu.")
+                    
+                    
                 elif sub_pilihan == '0':
                     break
                 
