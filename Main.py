@@ -200,12 +200,10 @@ def main():
                             print(f"| {nama}" + " " * (30 - len(nama)) + f"| {jumlah}" + " " * (15 - len(jumlah)) + f"| {tanggal_masuk}" + " " * (15 - len(tanggal_masuk)) + "|")
                         print("|" + "-" * 65 + "|")
                         print()
-                        input("\nTekan Enter untuk kembali ke menu.")
+                input("\nTekan Enter untuk kembali ke menu.")
 
-            filename = 'gudang.csv'
-
-            grouped_items = categorize_items(filename)
-
+            filename = 'gudang.csv' 
+            grouped_items = categorize_items(filename)  
             print("Pilih kategori untuk ditampilkan:")
             print("1. Semua")
             print("2. Bibit")
@@ -213,8 +211,7 @@ def main():
             print("4. Obat")
             print("5. Mesin")
             print("6. Tanaman")
-            choice = input("Masukkan pilihan Anda (1-6): ")
-
+            choice = input("Masukkan pilihan Anda (1-6): ") 
             category_mapping = {
                 "1": None,
                 "2": "Bibit",
@@ -222,12 +219,10 @@ def main():
                 "4": "Obat",
                 "5": "Mesin",
                 "6": "Tanaman"
-            }
-
-            selected_category = category_mapping.get(choice, None)
-
+            }   
+            selected_category = category_mapping.get(choice, None)  
             tampilkan_tabel(grouped_items, selected_category)
-            break
+        
         
         elif pilihan == '5':
             #fitur 5: Manajemen Persediaan
