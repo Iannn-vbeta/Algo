@@ -6,7 +6,7 @@ class PTable:
     
     def add_row(self, row):
         if len(row) != len(self.headers):
-            raise ValueError("Row length does not match number of headers")
+            raise ValueError("Jumlah kolom pada baris harus sama dengan jumlah kolom pada header")
         self.rows.append(row)
         self.column_widths = [max(self.column_widths[i], len(str(row[i]))) for i in range(len(row))]
     

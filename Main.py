@@ -138,7 +138,7 @@ def main():
             x = PTable(["Nama", "Jumlah", "Tanggal Masuk", "Kategori"])
             for row in data_terurut:
                 x.add_row([row['nama'], row['jumlah'], row['tanggal_masuk'], row['kategori']])
-            print(x)
+            x.print()
             input("\nTekan Enter untuk kembali ke menu.")
         
         elif pilihan == '2':
