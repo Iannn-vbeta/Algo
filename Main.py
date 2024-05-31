@@ -5,7 +5,7 @@ from ptabel import PTable
 
 file_path = './gudang.csv'
 
-def baca_data():
+def baca_data(filename=file_path):
     if not os.path.exists(file_path):
         with open(file_path, mode='w', newline='') as file:
             fieldnames = ['nama', 'jumlah', 'tanggal_masuk', 'kategori']
@@ -162,11 +162,6 @@ def main():
         
         elif pilihan == '4':
             #fitur 4: Pengelompokan Barang Berdasarkan Kategori
-            def moco(filename):
-                with open(filename, mode='r') as file:
-                    csv_reader = csv.DictReader(file)
-                    items = [row for row in csv_reader]
-                return items 
 
             def divide(items):
                 if len(items) <= 1:
@@ -191,7 +186,6 @@ def main():
                     right_grouped = conquer(items[1])
                     return combine(left_grouped, right_grouped)
 
-
             def combine(left, right):
                 combined = {}
                 for key, value in left.items():
@@ -201,7 +195,7 @@ def main():
                 return combined
 
             def categorize_items(filename):
-                items = moco(filename)
+                items = baca_data(filename)
                 divided_items = divide(items)
                 grouped_items = conquer(divided_items)
                 return grouped_items
@@ -209,9 +203,10 @@ def main():
             def tampilkan_tabel(grouped_items, selected_category=None):
                 if selected_category:
                     categories = [selected_category]
+                    print(selected_category)
                 else:
                     categories = grouped_items.keys()
-
+                    print(categories)
                 print("|" + "=" * 65 + "|")
                 print("|" + " " * 25 + "Pencarian Barang" + " " * 24 + "|")
                 print("|" + "=" * 65 + "|")
@@ -224,12 +219,10 @@ def main():
                         print("|" + "-" * 65 + "|")
                         print("| Nama" + " " * 26 + "| Jumlah" + " " * 9 + "| Tanggal Masuk  |")
                         print("|" + "-" * 65 + "|")
+                        x = PTable(["Nama", "Jumlah", "Tanggal Masuk"])
                         for item in items:
-                            nama = item['nama']
-                            jumlah = item['jumlah']
-                            tanggal_masuk = item['tanggal_masuk']
-                            print(f"| {nama}" + " " * (30 - len(nama)) + f"| {jumlah}" + " " * (15 - len(jumlah)) + f"| {tanggal_masuk}" + " " * (15 - len(tanggal_masuk)) + "|")
-                        print("|" + "-" * 65 + "|")
+                            x.add_row([item['nama'], item['jumlah'], item['tanggal_masuk']])
+                        x.print()    
                         print()
                 input("\nTekan Enter untuk kembali ke menu.")
 
