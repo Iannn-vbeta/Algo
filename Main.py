@@ -203,23 +203,13 @@ def main():
             def tampilkan_tabel(grouped_items, selected_category=None):
                 if selected_category:
                     categories = [selected_category]
-                    print(selected_category)
                 else:
                     categories = grouped_items.keys()
-                    print(categories)
-                print("|" + "=" * 65 + "|")
-                print("|" + " " * 25 + "Pencarian Barang" + " " * 24 + "|")
-                print("|" + "=" * 65 + "|")
-
                 for category in categories:
                     if category in grouped_items:
                         items = grouped_items[category]
-                        print("|" + "=" * 65 + "|")
-                        print(f"| Kategori: {category} "+ " "*(53-(len(category)))+"|")
-                        print("|" + "-" * 65 + "|")
-                        print("| Nama" + " " * 26 + "| Jumlah" + " " * 9 + "| Tanggal Masuk  |")
-                        print("|" + "-" * 65 + "|")
                         x = PTable(["Nama", "Jumlah", "Tanggal Masuk"])
+                        x.add_title(f"Kategori: {category}")
                         for item in items:
                             x.add_row([item['nama'], item['jumlah'], item['tanggal_masuk']])
                         x.print()    
@@ -234,16 +224,29 @@ def main():
             print("3. Peralatan")
             print("4. Obat")
             print("5. Mesin")
-            choice = input("Masukkan pilihan Anda (1-5): ") 
-            category_mapping = {
-                "1": None,
-                "2": "Bibit",
-                "3": "Peralatan",
-                "4": "Obat",
-                "5": "Mesin"
-                }       
-            selected_category = category_mapping.get(choice, None)  
-            tampilkan_tabel(grouped_items, selected_category)
+            print("0. Kembali ke Menu Utama")
+            while True:
+                print("                                                                                         ",end="",flush=True)
+                print("\rMasukkan pilihan Anda (1-5): ",end="",flush=True)
+                choice = input()
+                print(f"\033[F", end="", flush=True)
+                if choice == '0':
+                    break
+                elif choice not in ['1', '2', '3', '4', '5']:
+                    print(f"\033[K\rPilihan tidak valid, Tekan Enter untuk kembali memilih.",end="",flush=True)
+                    input()
+                    print(f"\033[F", end="", flush=True)
+                    continue 
+                category_mapping = {
+                    "1": None,
+                    "2": "Bibit",
+                    "3": "Peralatan",
+                    "4": "Obat",
+                    "5": "Mesin"
+                    }       
+                selected_category = category_mapping.get(choice, None)  
+                tampilkan_tabel(grouped_items, selected_category)
+                break
         
         
         elif pilihan == '5':
