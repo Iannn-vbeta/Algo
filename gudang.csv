@@ -1,6 +1,5 @@
 nama,jumlah,tanggal_masuk,kategori
-Bibit Padi,50,2024-01-15,Bibit
-Obat Pupuk,30,2024-02-10,Obat
+Bibit Padi,0,2024-01-15,Bibit
 Alat Cangkul,20,2024-03-12,Peralatan
 Mesin Traktor,10,2024-04-05,Mesin
 Bibit Jagung,60,2024-05-18,Bibit
@@ -47,3 +46,4 @@ Bibit Tomat,65,2024-09-09,Bibit
 Obat Penyubur,45,2024-10-25,Obat
 Alat Pemangkas,12,2024-11-20,Peralatan
 Mesin Pengering,9,2024-12-22,Mesin
+Bebas,-1,2024-05-31,Peralatan
