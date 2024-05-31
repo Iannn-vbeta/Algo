@@ -210,16 +210,14 @@ def main():
             print("3. Peralatan")
             print("4. Obat")
             print("5. Mesin")
-            print("6. Tanaman")
-            choice = input("Masukkan pilihan Anda (1-6): ") 
+            choice = input("Masukkan pilihan Anda (1-5): ") 
             category_mapping = {
                 "1": None,
                 "2": "Bibit",
                 "3": "Peralatan",
                 "4": "Obat",
-                "5": "Mesin",
-                "6": "Tanaman"
-            }   
+                "5": "Mesin"
+                }   
             selected_category = category_mapping.get(choice, None)  
             tampilkan_tabel(grouped_items, selected_category)
         
