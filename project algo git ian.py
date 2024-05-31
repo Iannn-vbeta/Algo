@@ -145,7 +145,6 @@ def main():
                 right = divide(items[mid:])
                 return [left, right]
 
-
             def conquer(items):
                 if isinstance(items[0], dict):  
                     grouped = {}
@@ -159,7 +158,6 @@ def main():
                     left_grouped = conquer(items[0])
                     right_grouped = conquer(items[1])
                     return combine(left_grouped, right_grouped)
-
 
             def combine(left, right):
                 combined = {}
@@ -199,28 +197,42 @@ def main():
                             tanggal_masuk = item['tanggal_masuk']
                             print(f"| {nama}" + " " * (30 - len(nama)) + f"| {jumlah}" + " " * (15 - len(jumlah)) + f"| {tanggal_masuk}" + " " * (15 - len(tanggal_masuk)) + "|")
                         print("|" + "-" * 65 + "|")
-                        print()
-                input("\nTekan Enter untuk kembali ke menu.")
+                        print() 
 
-            filename = 'gudang.csv' 
-            grouped_items = categorize_items(filename)  
-            print("Pilih kategori untuk ditampilkan:")
-            print("1. Semua")
-            print("2. Bibit")
-            print("3. Peralatan")
-            print("4. Obat")
-            print("5. Mesin")
-            choice = input("Masukkan pilihan Anda (1-5): ") 
-            category_mapping = {
-                "1": None,
-                "2": "Bibit",
-                "3": "Peralatan",
-                "4": "Obat",
-                "5": "Mesin"
-                }   
-            selected_category = category_mapping.get(choice, None)  
-            tampilkan_tabel(grouped_items, selected_category)
-        
+            filename = 'gudang.csv'
+            grouped_items = categorize_items(filename)
+
+            while True:
+                print("Pilih kategori untuk ditampilkan:")
+                print("1. Semua")
+                print("2. Bibit")
+                print("3. Peralatan")
+                print("4. Obat")
+                print("5. Mesin")
+                print("6. Tanaman")
+                print("7. Keluar")
+                choice = input("Masukkan pilihan Anda (1-7): ")
+
+                category_mapping = {
+                    "1": None,
+                    "2": "Bibit",
+                    "3": "Peralatan",
+                    "4": "Obat",
+                    "5": "Mesin",
+                    "6": "Tanaman",
+                    "7": "Keluar"
+                }
+
+                selected_category = category_mapping.get(choice, None)
+
+                if choice == "7":
+                    print("Terima kasih! Program selesai.")
+                    break
+
+                tampilkan_tabel(grouped_items, selected_category)
+
+                input("Tekan Enter untuk kembali ke menu awal...")
+
         
         elif pilihan == '5':
             #fitur 5: Manajemen Persediaan
