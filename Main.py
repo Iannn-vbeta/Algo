@@ -23,7 +23,6 @@ def tulis_data(data):
         writer.writeheader()
         writer.writerows(data)
 
-
 def selection_sort_tanggal(data):
     n = len(data)
     for i in range(n - 1):
@@ -36,17 +35,20 @@ def selection_sort_tanggal(data):
 
 def linear_search_nama(data, nama_barang):
     hasil_pencarian = []
+    nama_barang = nama_barang.lower()  
     for row in data:
-        if row['nama'].lower() == nama_barang.lower():
+        if nama_barang in row['nama'].lower():  
             hasil_pencarian.append(row)
     return hasil_pencarian
 
 def linear_search_tanggal(data, tanggal_masuk):
     hasil_pencarian = []
+    tanggal_masuk = tanggal_masuk.lower()  
     for row in data:
-        if row['tanggal_masuk'] == tanggal_masuk:
+        if tanggal_masuk in row['tanggal_masuk'].lower(): 
             hasil_pencarian.append(row)
     return hasil_pencarian
+
 
 def pencarian_barang(data_gudang):
     while True:
@@ -102,18 +104,18 @@ def main():
         pilihan = input("Pilih opsi (1-5) atau 0 untuk keluar: ")
 
         if pilihan == '1':
-            # Implementasi fitur 1: Pengurutan Otomatis
+            #fitur 1: Pengurutan Otomatis
             data_terurut = selection_sort_tanggal(data_gudang)
             for row in data_terurut:
                 print(row)
             input("\nTekan Enter untuk kembali ke menu.")
         
         elif pilihan == '2':
-            # Implementasi fitur 2: Pencarian Barang
+            #fitur 2: Pencarian Barang
             pencarian_barang(data_gudang)
         
         elif pilihan == '3':
-            # Implementasi fitur 3: Pemberitahuan Stok Hampir Habis
+            #fitur 3: Pemberitahuan Stok Hampir Habis
             ambang_batas = int(input("Masukkan ambang batas stok: "))
             stok_hampir_habis = []
             for row in data_gudang:
@@ -128,36 +130,107 @@ def main():
             input("\nTekan Enter untuk kembali ke menu.")
         
         elif pilihan == '4':
-            # Implementasi fitur 4: Pengelompokan Barang Berdasarkan Kategori
-            def divide_and_conquer(data_list):
-                if len(data_list) <= 1:
-                    return data_list
-                mid = len(data_list) // 2
-                left = divide_and_conquer(data_list[:mid])
-                right = divide_and_conquer(data_list[mid:])
-                return merge(left, right)
-            
-            def merge(left, right):
-                result = []
-                while left and right:
-                    if left[0]['kategori'] <= right[0]['kategori']:
-                        result.append(left.pop(0))
-                    else:
-                        result.append(right.pop(0))
-                result.extend(left if left else right)
-                return result
-            
-            sorted_data_list = divide_and_conquer(data_gudang)
-            if sorted_data_list:
-                print("Pengelompokan Barang Berdasarkan Kategori:")
-                for row in sorted_data_list:
-                    print(row)
-            else:
-                print("Tidak ada data barang untuk dikelompokkan.")
-            input("\nTekan Enter untuk kembali ke menu.")
+            #fitur 4: Pengelompokan Barang Berdasarkan Kategori
+            def moco(filename):
+                with open(filename, mode='r') as file:
+                    csv_reader = csv.DictReader(file)
+                    items = [row for row in csv_reader]
+                return items 
+
+            def divide(items):
+                if len(items) <= 1:
+                    return items
+                mid = len(items) // 2
+                left = divide(items[:mid])
+                right = divide(items[mid:])
+                return [left, right]
+
+
+            def conquer(items):
+                if isinstance(items[0], dict):  
+                    grouped = {}
+                    for item in items:
+                        category = item['kategori']
+                        if category not in grouped:
+                            grouped[category] = []
+                        grouped[category].append(item)
+                    return grouped
+                else:  
+                    left_grouped = conquer(items[0])
+                    right_grouped = conquer(items[1])
+                    return combine(left_grouped, right_grouped)
+
+
+            def combine(left, right):
+                combined = {}
+                for key, value in left.items():
+                    combined[key] = combined.get(key, []) + value
+                for key, value in right.items():
+                    combined[key] = combined.get(key, []) + value
+                return combined
+
+            def categorize_items(filename):
+                items = moco(filename)
+                divided_items = divide(items)
+                grouped_items = conquer(divided_items)
+                return grouped_items
+
+            def tampilkan_tabel(grouped_items, selected_category=None):
+                if selected_category:
+                    categories = [selected_category]
+                else:
+                    categories = grouped_items.keys()
+
+                print("|" + "=" * 65 + "|")
+                print("|" + " " * 25 + "Pencarian Barang" + " " * 24 + "|")
+                print("|" + "=" * 65 + "|")
+
+                for category in categories:
+                    if category in grouped_items:
+                        items = grouped_items[category]
+                        print("|" + "=" * 65 + "|")
+                        print(f"| Kategori: {category} "+ " "*(53-(len(category)))+"|")
+                        print("|" + "-" * 65 + "|")
+                        print("| Nama" + " " * 26 + "| Jumlah" + " " * 9 + "| Tanggal Masuk  |")
+                        print("|" + "-" * 65 + "|")
+                        for item in items:
+                            nama = item['nama']
+                            jumlah = item['jumlah']
+                            tanggal_masuk = item['tanggal_masuk']
+                            print(f"| {nama}" + " " * (30 - len(nama)) + f"| {jumlah}" + " " * (15 - len(jumlah)) + f"| {tanggal_masuk}" + " " * (15 - len(tanggal_masuk)) + "|")
+                        print("|" + "-" * 65 + "|")
+                        print()
+                        input("\nTekan Enter untuk kembali ke menu.")
+
+            filename = 'gudang.csv'
+
+            grouped_items = categorize_items(filename)
+
+            print("Pilih kategori untuk ditampilkan:")
+            print("1. Semua")
+            print("2. Bibit")
+            print("3. Peralatan")
+            print("4. Obat")
+            print("5. Mesin")
+            print("6. Tanaman")
+            choice = input("Masukkan pilihan Anda (1-6): ")
+
+            category_mapping = {
+                "1": None,
+                "2": "Bibit",
+                "3": "Peralatan",
+                "4": "Obat",
+                "5": "Mesin",
+                "6": "Tanaman"
+            }
+
+            selected_category = category_mapping.get(choice, None)
+
+            tampilkan_tabel(grouped_items, selected_category)
+            break
         
         elif pilihan == '5':
-            # Implementasi fitur 5: Manajemen Persediaan
+            #fitur 5: Manajemen Persediaan
             while True:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 print("==========================================")
@@ -172,6 +245,10 @@ def main():
                 if sub_pilihan == '1':
                     # Tambah Barang
                     nama = input("Masukkan nama barang: ")
+                    if any(row['nama'].lower() == nama.lower() for row in data_gudang):
+                        print("Barang dengan nama tersebut sudah ada.")
+                        input("\nTekan Enter untuk kembali ke menu.")
+                        continue
                     jumlah = input("Masukkan jumlah barang: ")
                     tanggal_masuk = input("Masukkan tanggal masuk (YYYY-MM-DD) atau kosongkan untuk tanggal hari ini: ")
                     if not tanggal_masuk:
@@ -181,16 +258,16 @@ def main():
                         print("==========================================")
                         print("        Kategori Barang")
                         print("==========================================")
-                        print("1. Alat")
+                        print("1. Peralatan")
                         print("2. Pupuk")
                         print("3. Benih")
-                        print("4. Pakan")
-                        print("5. Hasil Panen")
+                        print("4. Obat")
+                        print("5. Mesin")
                         print("0. Kembali ke Menu Utama")
                         sub_sub_pilihan = input("Pilih kategori (1-5) atau 0 untuk kembali: ")
                             
                         if sub_sub_pilihan == '1':
-                            kategori = 'Alat'
+                            kategori = 'Peralatan'
                             break
                         elif sub_sub_pilihan == '2':
                             kategori = 'Pupuk'
@@ -199,10 +276,10 @@ def main():
                             kategori = 'Benih'
                             break
                         elif sub_sub_pilihan == '4':
-                            kategori = 'Pakan'
+                            kategori = 'Obat'
                             break
                         elif sub_sub_pilihan == '5':
-                            kategori = 'Hasil Panen'
+                            kategori = 'Mesin'
                             break
                         elif sub_sub_pilihan == '0':
                             break

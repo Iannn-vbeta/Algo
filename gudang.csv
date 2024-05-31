@@ -1,11 +1,120 @@
 nama,jumlah,tanggal_masuk,kategori
-Pupuk,10,2024-12-01,Umum
-Sekop,1,2024-01-01,Alat
-Parang,1, 2024-05-01,Alat
-Benih jeruk, 100, 2024-04-05, Benih
-Benih mangga, 100, 2024-05-21, Benih
-Pestisida, 10, 2024-05-10, Alat
-Pupuk Algo,10,2004-06-12, Alat
-Pupuk Kandang,10,2024-05-30, Pupuk
-Magnet,100,2024-05-30,Alat
-Pupuk Sulfur,10,2017-04-20,Pupuk
+Pupuk Urea,100,2024-01-01,Mesin
+Bibit Padi,50,2024-01-15,Tanaman
+Pestisida,200,2024-03-20,Peralatan
+Bibit Kangkung,52,2024-06-25,Mesin
+Cangkul,80,2024-03-10,Bibit
+Traktor Mini,150,2024-05-05,Obat
+Bibit Jagung,30,2024-06-01,Pupuk
+Bibit Kacang,25,2024-06-03,Tanaman
+Bibit Ketimun,20,2024-06-15,Mesin
+Bibit Tomat,40,2024-06-05,Mesin
+Bibit Cabe,45,2024-06-07,Peralatan
+Bibit Bawang,50,2024-06-09,Obat
+Bibit Terong,35,2024-06-11,Pupuk
+Bibit Wortel,60,2024-06-13,Tanaman
+Bibit Kubis,55,2024-06-17,Peralatan
+Bibit Brokoli,33,2024-06-19,Obat
+Bibit Bayam,70,2024-06-21,Pupuk
+Bibit Selada,44,2024-06-23,Tanaman
+Bibit Daun Bawang,48,2024-06-27,Peralatan
+Bibit Sawi,37,2024-06-29,Obat
+Bibit Kentang,50,2024-07-01,Pupuk
+Bibit Labu,23,2024-07-03,Tanaman
+Bibit Melon,31,2024-07-05,Mesin
+Bibit Semangka,29,2024-07-07,Peralatan
+Bibit Paprika,38,2024-07-09,Obat
+Bibit Lobak,27,2024-07-11,Pupuk
+Bibit Zucchini,18,2024-07-13,Tanaman
+Bibit Bayam Merah,34,2024-07-15,Mesin
+Bibit Parsley,22,2024-07-17,Peralatan
+Bibit Basil,41,2024-07-19,Obat
+Bibit Bunga Kol,45,2024-07-21,Pupuk
+Bibit Kacang Panjang,36,2024-07-23,Tanaman
+Bibit Bit,20,2024-07-25,Mesin
+Bibit Kacang Polong,24,2024-07-27,Peralatan
+Bibit Cabai Rawit,32,2024-07-29,Obat
+Bibit Okra,19,2024-07-31,Pupuk
+Bibit Kacang Hijau,28,2024-08-02,Tanaman
+Bibit Jagung Manis,50,2024-08-04,Mesin
+Bibit Bayam Hijau,53,2024-08-06,Peralatan
+Bibit Pakcoy,39,2024-08-08,Obat
+Bibit Caisim,47,2024-08-10,Pupuk
+Mangga,150,2024-08-12,Peralatan
+Apel,75,2024-08-14,Mesin
+Jeruk,200,2024-08-16,Obat
+Durian,5,2024-08-18,Pupuk
+Rambutan,80,2024-08-20,Tanaman
+Jambu,10,2024-08-22,Mesin
+Alpukat,300,2024-08-24,Peralatan
+Pisang,60,2024-08-26,Obat
+Nangka,4,2024-08-28,Pupuk
+Kelapa,18,2024-08-30,Tanaman
+Anggur,220,2024-09-01,Mesin
+Sawo,9,2024-09-03,Peralatan
+Pepaya,11,2024-09-05,Obat
+Belimbing,130,2024-09-07,Pupuk
+Kedondong,14,2024-09-09,Tanaman
+Cangkul,80,2024-03-10,Mesin
+Jeruk,200,2024-08-16,Peralatan
+Bibit Caisim,47,2024-08-10,Obat
+Durian,5,2024-08-18,Pupuk
+Apel,75,2024-08-14,Tanaman
+Rambutan,80,2024-08-20,Mesin
+Jambu,10,2024-08-22,Peralatan
+Alpukat,300,2024-08-24,Obat
+Pisang,60,2024-08-26,Pupuk
+Nangka,4,2024-08-28,Tanaman
+Kelapa,18,2024-08-30,Mesin
+Anggur,220,2024-09-01,Peralatan
+Sawo,9,2024-09-03,Obat
+Pepaya,11,2024-09-05,Pupuk
+Belimbing,130,2024-09-07,Tanaman
+Kedondong,14,2024-09-09,Mesin
+Bibit Bayam,70,2024-06-21,Peralatan
+Bibit Bayam Hijau,53,2024-08-06,Obat
+Bibit Bayam Merah,34,2024-07-15,Pupuk
+Bibit Bawang,50,2024-06-09,Tanaman
+Bibit Basil,41,2024-07-19,Mesin
+Bibit Bit,20,2024-07-25,Peralatan
+Bibit Brokoli,33,2024-06-19,Obat
+Bibit Bunga Kol,45,2024-07-21,Pupuk
+Bibit Cabai Rawit,32,2024-07-29,Tanaman
+Bibit Daun Bawang,48,2024-06-27,Mesin
+Bibit Jagung,30,2024-06-01,Peralatan
+Bibit Jagung Manis,50,2024-08-04,Obat
+Bibit Kacang,25,2024-06-03,Pupuk
+Bibit Kacang Hijau,28,2024-08-02,Tanaman
+Bibit Kacang Panjang,36,2024-07-23,Mesin
+Bibit Kacang Polong,24,2024-07-27,Peralatan
+Bibit Kacang Panjang,36,2024-07-23,Obat
+Bibit Kacang Polong,24,2024-07-27,Pupuk
+Bibit Kacang Polong,24,2024-07-27,Tanaman
+Bibit Kacang Polong,24,2024-07-27,Mesin
+Bibit Kangkung,52,2024-06-25,Peralatan
+Bibit Kecambah,3,2024-08-09,Obat
+Bibit Kecambah,3,2024-08-09,Pupuk
+Bibit Kecambah,3,2024-08-09,Tanaman
+Bibit Kentang,50,2024-07-01,Mesin
+Bibit Krokot,7,2024-08-11,Peralatan
+Bibit Labu,23,2024-07-03,Obat
+Bibit Lobak,27,2024-07-11,Pupuk
+Bibit Lobak,27,2024-07-11,Tanaman
+Bibit Melon,31,2024-07-05,Mesin
+Bibit Okra,19,2024-07-31,Peralatan
+Bibit Pakcoy,39,2024-08-08,Obat
+Bibit Paprika,38,2024-07-09,Pupuk
+Bibit Parsley,22,2024-07-17,Tanaman
+Bibit Padi,50,2024-01-15,Mesin
+Bibit Semangka,29,2024-07-07,Peralatan
+Bibit Selada,44,2024-06-23,Obat
+Bibit Sawi,37,2024-06-29,Pupuk
+Bibit Sawi,37,2024-06-29,Tanaman
+Bibit Sawi,37,2024-06-29,Mesin
+Bibit Selada,44,2024-06-23,Peralatan
+Bibit Terong,35,2024-06-11,Obat
+Bibit Tomat,40,2024-06-05,Pupuk
+Bibit Wortel,60,2024-06-13,Tanaman
+Pupuk Urea,100,2024-01-01,Mesin
+Mangga,150,2024-08-12,Peralatan
+Pestisida,200,2024-03-20,Obat
