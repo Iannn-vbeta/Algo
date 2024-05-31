@@ -20,11 +20,12 @@ class PTable:
     def print(self):
         print(self.__str__())
 
-# Example usage:
-SimpleTable = PTable
-table = SimpleTable(["Name", "Age", "City"])
-table.add_row(["Alice", 30, "New York"])
-table.add_row(["Bob", 25, "San Francisco"])
-table.add_row(["Charlie", 35, "Los Angeles"])
+# contoh penggunaan
+if __name__ == "__main__":
+    table = PTable
+    table = table(["Nama", "Umur", "Kota"])
+    table.add_row(["Fana", 30000, "Dewa"])
+    table.add_row(["MasFana", 25000, "Eden"])
+    table.add_row(["Ilak", 35, "Bowait"])
 
-table.print()
+    table.print()
