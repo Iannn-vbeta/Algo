@@ -322,9 +322,13 @@ def main():
                 elif sub_pilihan == '2':
                     # Hapus Barang
                     nama = input("Masukkan nama barang yang ingin dihapus: ")
-                    data_gudang = [row for row in data_gudang if row['nama'] != nama]
-                    print("Barang berhasil dihapus.")
-                    tulis_data(data_gudang)
+                    data_hapus = [row for row in data_gudang if row['nama'] == nama]
+                    if len(data_hapus) != 0:
+                        data_gudang = [row for row in data_gudang if row['nama'] != nama]
+                        print("Barang berhasil dihapus.")
+                        tulis_data(data_gudang)
+                    else:
+                        print("Data tidak sesuai")
                     input("\nTekan Enter untuk kembali ke menu.")
                 
                 elif sub_pilihan == '3':

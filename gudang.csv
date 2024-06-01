@@ -1,49 +1,49 @@
 nama,jumlah,tanggal_masuk,kategori
 Bibit Padi,0,2024-01-15,Bibit
-Alat Cangkul,20,2024-03-12,Peralatan
-Mesin Traktor,10,2024-04-05,Mesin
-Bibit Jagung,60,2024-05-18,Bibit
-Obat Herbisida,25,2024-06-20,Obat
-Alat Sekop,15,2024-07-14,Peralatan
-Mesin Pemotong,5,2024-08-22,Mesin
-Bibit Kedelai,70,2024-09-30,Bibit
-Obat Pestisida,40,2024-10-11,Obat
-Alat Gergaji,10,2024-11-09,Peralatan
-Mesin Panen,8,2024-12-19,Mesin
+Bibit Semangka,60,2024-01-19,Bibit
 Bibit Kentang,45,2024-01-25,Bibit
-Obat Insektisida,50,2024-02-17,Obat
-Alat Garu,20,2024-03-21,Peralatan
-Mesin Penyemprot,12,2024-04-23,Mesin
-Bibit Bawang,55,2024-05-30,Bibit
-Obat Fungisida,30,2024-06-15,Obat
-Alat Penyiram,25,2024-07-26,Peralatan
-Mesin Traktor Mini,7,2024-08-29,Mesin
-Bibit Ubi,65,2024-09-19,Bibit
-Obat Vitamin,35,2024-10-21,Obat
-Alat Perkakas,20,2024-11-13,Peralatan
-Mesin Penggiling,9,2024-12-05,Mesin
 Bibit Singkong,50,2024-01-28,Bibit
 Obat Zat Pengatur Tumbuh,45,2024-02-13,Obat
+Obat Insektisida,50,2024-02-17,Obat
+Obat Suplemen,35,2024-02-27,Obat
+Alat Cangkul,20,2024-03-12,Peralatan
+Alat Garu,20,2024-03-21,Peralatan
+Alat Bajak,14,2024-03-22,Peralatan
 Alat Traktor Tangan,10,2024-03-27,Peralatan
+Mesin Traktor,10,2024-04-05,Mesin
 Mesin Pemotong Rumput,11,2024-04-10,Mesin
+Mesin Penyemprot,12,2024-04-23,Mesin
+Mesin Pengolah Tanah,8,2024-04-30,Mesin
 Bibit Anggur,70,2024-05-05,Bibit
+Bibit Labu,55,2024-05-11,Bibit
+Bibit Jagung,60,2024-05-18,Bibit
+Bibit Bawang,55,2024-05-30,Bibit
+Bebas,-1,2024-05-31,Peralatan
+Obat Fungisida,30,2024-06-15,Obat
+Obat Pembasmi Hama,20,2024-06-18,Obat
+Obat Herbisida,25,2024-06-20,Obat
 Obat Nutrisi Bibit,40,2024-06-28,Obat
 Alat Pemotong,18,2024-07-12,Peralatan
-Mesin Penyiram Otomatis,6,2024-08-19,Mesin
-Bibit Stroberi,80,2024-09-01,Bibit
-Obat Antibiotik,25,2024-10-15,Obat
-Alat Perkebunan,22,2024-11-30,Peralatan
-Mesin Pemanen Otomatis,10,2024-12-13,Mesin
-Bibit Semangka,60,2024-01-19,Bibit
-Obat Suplemen,35,2024-02-27,Obat
-Alat Bajak,14,2024-03-22,Peralatan
-Mesin Pengolah Tanah,8,2024-04-30,Mesin
-Bibit Labu,55,2024-05-11,Bibit
-Obat Pembasmi Hama,20,2024-06-18,Obat
+Alat Sekop,15,2024-07-14,Peralatan
 Alat Penggali,16,2024-07-23,Peralatan
+Alat Penyiram,25,2024-07-26,Peralatan
 Mesin Pengemas,7,2024-08-07,Mesin
+Mesin Penyiram Otomatis,6,2024-08-19,Mesin
+Mesin Pemotong,5,2024-08-22,Mesin
+Mesin Traktor Mini,7,2024-08-29,Mesin
+Bibit Stroberi,80,2024-09-01,Bibit
 Bibit Tomat,65,2024-09-09,Bibit
+Bibit Ubi,65,2024-09-19,Bibit
+Bibit Kedelai,70,2024-09-30,Bibit
+Obat Pestisida,40,2024-10-11,Obat
+Obat Antibiotik,25,2024-10-15,Obat
+Obat Vitamin,35,2024-10-21,Obat
 Obat Penyubur,45,2024-10-25,Obat
+Alat Gergaji,10,2024-11-09,Peralatan
+Alat Perkakas,20,2024-11-13,Peralatan
 Alat Pemangkas,12,2024-11-20,Peralatan
+Alat Perkebunan,22,2024-11-30,Peralatan
+Mesin Penggiling,9,2024-12-05,Mesin
+Mesin Pemanen Otomatis,10,2024-12-13,Mesin
+Mesin Panen,8,2024-12-19,Mesin
 Mesin Pengering,9,2024-12-22,Mesin
-Bebas,-1,2024-05-31,Peralatan
