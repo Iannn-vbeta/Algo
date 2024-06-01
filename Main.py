@@ -95,8 +95,10 @@ def pencarian_barang(data_gudang):
             hasil = linear_search_nama(data_gudang, nama_barang)
             if hasil:
                 print("Hasil Pencarian Berdasarkan Nama Barang:")
+                x = PTable(["Nama", "Jumlah", "Tanggal Masuk", "Kategori"])
                 for row in hasil:
-                    print(row)
+                    x.add_row([row['nama'], row['jumlah'], row['tanggal_masuk'], row['kategori']])
+                x.print()
             else:
                 print("Data tidak ditemukan.")
             input("\nTekan Enter untuk kembali ke menu.")
@@ -104,9 +106,10 @@ def pencarian_barang(data_gudang):
             tanggal_masuk = input("Masukkan tanggal masuk (YYYY-MM-DD): ")
             hasil = linear_search_tanggal(data_gudang, tanggal_masuk)
             if hasil:
-                print("Hasil Pencarian Berdasarkan Tanggal Masuk:")
+                x = PTable(["Nama", "Jumlah", "Tanggal Masuk", "Kategori"])
                 for row in hasil:
-                    print(row)
+                    x.add_row([row['nama'], row['jumlah'], row['tanggal_masuk'], row['kategori']])
+                x.print()
             else:
                 print("Data tidak ditemukan.")
             input("\nTekan Enter untuk kembali ke menu.")
