@@ -17,25 +17,100 @@ def baca_data(filename=file_path):
         data = [row for row in reader]
     return data
 
+def catat_barang_keluar(file_path,nama_barang,jumlah_barang,tanggal_keluar=None):
+    tanggal_keluar = tanggal_keluar or datetime.datetime.now().strftime("%Y-%m-%d")
+    list_barang = baca_data(file_path)
+    for row in list_barang:
+        if row['nama'] == nama_barang:
+            row['jumlah'] = str(int(row['jumlah']) - jumlah_barang)
+            break
+    with open(file_path, mode='w', newline='') as file:
+        fieldnames = ['nama', 'jumlah', 'tanggal_masuk', 'kategori']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(list_barang)
+    with open('./barang_keluar.csv', mode='a', newline='') as file:
+        fieldnames = ['nama', 'jumlah', 'tanggal_keluar']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writerow({'nama': nama_barang, 'jumlah': jumlah_barang, 'tanggal_keluar': tanggal_keluar})
+
+def totals(data):
+    total = 0
+    for item in data:
+        total += item
+    return total
+
+def sortdict(data, key=None, reverse=False):
+    sorted_data = data[:]
+    for i in range(len(sorted_data) - 1):
+        min_idx = i
+        for j in range(i + 1, len(sorted_data)):
+            if key is not None:
+                if key(sorted_data[j]) < key(sorted_data[min_idx]):
+                    min_idx = j
+            else:
+                if sorted_data[j] < sorted_data[min_idx]:
+                    min_idx = j
+        sorted_data[i], sorted_data[min_idx] = sorted_data[min_idx], sorted_data[i]
+    if reverse:
+        sorted_data.reverse()
+    return sorted_data
+
+def statistik_barang_keluar():
+    data_barang_keluar = []
+    
+    with open('./barang_keluar.csv', mode='r') as file:
+        reader = csv.DictReader(file)
+        data_barang_keluar = [row for row in reader]
+    data_aggregated = {}
+    
+    for row in data_barang_keluar:
+        nama = row['nama']
+        jumlah = int(row['jumlah'])
+        if nama in data_aggregated:
+            data_aggregated[nama] += jumlah
+        else:
+            data_aggregated[nama] = jumlah
+            
+    aggregated_data = [{'nama': nama, 'jumlah': jumlah} for nama, jumlah in data_aggregated.items()]
+    
+    total_jumlah = totals([row['jumlah'] for row in aggregated_data])
+
+    sorted_data = sortdict(aggregated_data, key=lambda x: x['jumlah'], reverse=True)
+
+    x = PTable(["Nama", "Jumlah", "Persentase"])
+    for row in sorted_data:
+        persentase = row['jumlah'] / total_jumlah * 100
+        x.add_row([row['nama'], row['jumlah'], f"{persentase:.2f}%"])
+
+    x.print()
+    print(f"Total Jumlah Barang Keluar: {total_jumlah}")
+    return total_jumlah
+
 def statistik_gudang(data_gudang):
     total_barang = len(data_gudang)
-    total_jumlah = sum(int(row['jumlah']) for row in data_gudang)
+    total_jumlah = totals([int(row['jumlah']) for row in data_gudang])
     total_barang_per_kategori = {}
     for row in data_gudang:
         kategori = row['kategori']
         if kategori not in total_barang_per_kategori:
             total_barang_per_kategori[kategori] = 0
-        total_barang_per_kategori[kategori] += 1
+        total_barang_per_kategori[kategori] += int(row['jumlah'])
     dict_return = {
         'total_barang': total_barang,
         'total_jumlah': total_jumlah,
         'total_barang_per_kategori': total_barang_per_kategori
     }
-    print(f"  Total Barang: {total_barang}")
-    print(f"  Total Jumlah: {total_jumlah}")
-    print( "  Total Barang per Kategori:")
+    x = PTable(["Kategori", "Total Barang", "Persentase", "Jumlah Barang", "Persentase"])
     for kategori, total in total_barang_per_kategori.items():
-        print(f"  | {kategori}: {total}")    
+        persentase = total / total_jumlah * 100
+        jumlah_entitas = len([row for row in data_gudang if row['kategori'] == kategori])
+        persentase_entitas = jumlah_entitas / total_barang * 100
+        x.add_row([kategori, total, f"{persentase:.2f}%", jumlah_entitas, f"{persentase_entitas:.2f}%"])
+    x.add_title("Barang per Kategori")
+    x.print()
+    print(f"Total Barang: {total_barang}")
+    print(f"Total Jumlah Barang: {total_jumlah}")
     return dict_return
 
 def tulis_data(data):
@@ -263,6 +338,8 @@ def main():
                 print("2. Hapus Barang")
                 print("3. Update Jumlah Barang")
                 print("4. Barang Keluar")
+                print("5. Statistik Barang Keluar")
+                print("6. Statistik Gudang")
                 print("0. Kembali ke Menu Utama")
                 sub_pilihan = input("Pilih opsi (1-3) atau 0 untuk kembali: ")
 
@@ -349,6 +426,11 @@ def main():
                     input("\nTekan Enter untuk kembali ke menu.")
                     
                 elif sub_pilihan =="4":
+                    x = PTable(["Nama", "Jumlah", "Tanggal Masuk", "Kategori"])
+                    for row in data_gudang:
+                        x.add_row([row['nama'], row['jumlah'], row['tanggal_masuk'], row['kategori']])
+                    x.print()
+                    
                     nama = input("Masukkan nama barang yang keluar: ")
                     jumlah = input("Masukkan jumlah barang yang keluar: ")
                     for row in data_gudang:
@@ -363,8 +445,14 @@ def main():
                     tanggal_keluar = input("Masukkan tanggal keluar (YYYY-MM-DD) atau kosongkan untuk tanggal hari ini: ")
                     if not tanggal_keluar:
                         tanggal_keluar = datetime.datetime.now().strftime("%Y-%m-%d")
+                    catat_barang_keluar(file_path,nama,int(jumlah),tanggal_keluar)
                     input("\nTekan Enter untuk kembali ke menu.")
-                    
+                elif sub_pilihan == '5':
+                    statistik_barang_keluar()
+                    input("\nTekan Enter untuk kembali ke menu.")
+                elif sub_pilihan == '6':
+                    statistik_gudang(data_gudang)
+                    input("\nTekan Enter untuk kembali ke menu.")
                     
                 elif sub_pilihan == '0':
                     break
